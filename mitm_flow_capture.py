@@ -2,25 +2,24 @@ import mitmproxy.http
 from typing import Tuple, Dict
 
 
-# def get_plaintext_raw(req: mitmproxy.http.HTTPRequest, res: mitmproxy.http.HTTPResponse):
-#     from mitmproxy.contentviews.auto import ViewAuto
-#     ct, lines = ViewAuto()(res.get_content(), headers=req.headers)
-#     urlencoded_form = req.urlencoded_form
-#     req_content = req.get_content()
-#     raw = dict()
-#     content = [line for line in lines]
-#     if ct == 'Hex':
-#         if urlencoded_form:
-#
-#         pass
-#     elif ct == 'No content':
-#         pass
-#     elif ct == 'XML' or ct == 'HTML':
-#         pass
-#     elif ct in ["image/png", "image/jpeg", "image/gif", "image/vnd.microsoft.icon", "image/x-icon", "image/webp"]:
-#         pass
-#     elif ct == 'Query':
-#         pass
+def get_plaintext_raw(req: mitmproxy.http.HTTPRequest, res: mitmproxy.http.HTTPResponse):
+    from mitmproxy.contentviews.auto import ViewAuto
+    ct, lines = ViewAuto()(res.get_content(), headers=req.headers)
+    urlencoded_form = req.urlencoded_form
+    req_content = req.get_content()
+    raw = dict()
+    content = [line for line in lines]
+    if ct == 'Hex':
+        if urlencoded_form:
+            pass
+    elif ct == 'No content':
+        pass
+    elif ct == 'XML' or ct == 'HTML':
+        pass
+    elif ct in ["image/png", "image/jpeg", "image/gif", "image/vnd.microsoft.icon", "image/x-icon", "image/webp"]:
+        pass
+    elif ct == 'Query':
+        pass
 
 
 class FlowCapture:

@@ -144,6 +144,7 @@ class SDKResult:
     info: str
 
 
+# 国测要的结果格式
 @dataclass(init=True, repr=True, eq=True, order=False, unsafe_hash=False, frozen=False)
 class LibPLDResult:
     app_name: str
@@ -171,7 +172,7 @@ class LibPLDResult:
     requestdata: []
 
 
-class DaeResult:
+class TmpResult:
     class Api:
         behavior: str
         method: str
@@ -224,6 +225,7 @@ class DaeResult:
                 for req in self.lib_net[lib]:
                     if ciphertext in req.request_raw:
                         req.plaintext.append(plaintext)
+            # 每个库的每个api的每个数据（args、relatedAttrs）
             for api in self.lib_apis[lib][Config.Api.NORMAL_API_LIST]:
                 for v in api.values:
                     for net in self.lib_net[lib]:
@@ -277,6 +279,7 @@ class DaeResult:
             ))
         self.net_list = res
 
+    # 从文件读取api结果，转为API对象
     def parse_api_result(self, api_file: str, libs: List[str], pkgname: str):
 
         def get_lib_pkgname(cls: str, libs: List[str]) -> str:
@@ -335,7 +338,7 @@ class DaeResult:
                         values.add(attrs[attr])
                 attrs.pop('xrefFrom')
 
-            tmp.append(DaeResult.Api(
+            tmp.append(TmpResult.Api(
                 behavior, method, xref, values=values, args=args, attrs=attrs
             ))
             # if tmp is self.lib_apis[lib][Config.Api.CRYPTO_API_LIST]:

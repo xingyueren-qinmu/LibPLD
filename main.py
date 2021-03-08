@@ -9,7 +9,7 @@ from queue import Queue
 from zipfile import ZipFile
 from typing import Dict, IO, List
 from flask import Flask, request, Response
-from data import Config, DaeResult
+from data import Config, TmpResult
 from perform_task import static_analyze
 from concurrent.futures import ThreadPoolExecutor
 
@@ -145,7 +145,7 @@ def analyse_results():
     while True:
         if not tasks[Config.Task.DONE].empty():
             task: Dict = tasks[Config.Task.DONE].get()
-            dae_result = DaeResult(task)
+            dae_result = TmpResult(task)
 
 
 
@@ -157,3 +157,5 @@ if __name__ == '__main__':
     mutex = Lock()
     pool.map(query_task, ())
     pool.map(analyse_results, ())
+    # subprocess(命令行调用)
+    # 直接调用mitmproxy
